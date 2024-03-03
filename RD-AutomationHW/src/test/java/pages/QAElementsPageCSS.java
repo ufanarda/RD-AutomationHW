@@ -30,6 +30,7 @@ public class QAElementsPageCSS extends Driver {
     public static final By ADD_BUTTON = By.cssSelector("#addNewRecordButton");
     public static final By SUBMIT_BUTTON = By.cssSelector("#submit");
 
+    //FORM POP-UP
     public static final By FIRST_NAME_TXT = By.cssSelector("#firstName-wrapper #firstName");
     public static final By LAST_NAME_TXT = By.cssSelector("#lastName-wrapper #lastName");
     public static final By EMAIL_TXT = By.cssSelector("#userEmail-wrapper #userEmail");
