@@ -21,7 +21,7 @@ public class QAElementSteps {
         elementsPage.openElementsMeuPages(menuname);
     }
 
-    @And("Buttons sayfasinda Click Me buttonnuna bas")
+    @And("Buttons sayfasinda Click Me buttonuna bas")
     public void clickMeButtons(){
         elementsPage.clickMeButtons();
     }
