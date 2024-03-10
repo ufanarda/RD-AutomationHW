@@ -1,12 +1,13 @@
 package tests;
 
-import drivers.Driver;
+import driver.Driver;
+
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utils.PropertyManager;
-
-import java.net.MalformedURLException;
 
 public class BaseTest {
 
@@ -17,16 +18,35 @@ public class BaseTest {
     String url = propertyManager.getProperty("APP_URL");
 
 
-    @BeforeMethod(alwaysRun = true)
-    public void before() throws MalformedURLException {
-        driver = webDriver.initializeDriver();
+
+
+    @BeforeMethod()
+    public void before() {
+        driver = webDriver.initializeDriver(driver);
         driver.get(url);
+        setDriver(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+
+
+    @AfterMethod()
     public void after() {
         webDriver.quitDriver();
     }
+
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
+    public static void setDriver(WebDriver driver) {
+        BaseTest.driver = driver;
+    }
+
+
+
+
+
 }
 
 

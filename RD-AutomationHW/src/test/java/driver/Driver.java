@@ -1,14 +1,13 @@
-package drivers;
+package driver;
 
 import org.openqa.selenium.WebDriver;
 
-import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class Driver {
     public static WebDriver driver;
 
-    public WebDriver initializeDriver() throws MalformedURLException {
+    public static WebDriver initializeDriver(WebDriver driver) {
         driver = DriverFactory.getDriver();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));

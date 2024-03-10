@@ -1,4 +1,4 @@
-package drivers;
+package driver;
 
 import utils.PropertyManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -14,9 +14,9 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-class DriverFactory {
+public class DriverFactory {
     static PropertyManager propertyManager = new PropertyManager();
-    static WebDriver getDriver() throws MalformedURLException {
+    static WebDriver getDriver() {
         String browser = propertyManager.getProperty("BROWSER");
         if (browser == null) {
             WebDriverManager.chromedriver().setup();
@@ -39,14 +39,14 @@ class DriverFactory {
                 WebDriverManager.safaridriver().arch64().setup();
                 return new SafariDriver();
 
-            case "REMOTE":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--no-sandbox");
-                if ("Y".equalsIgnoreCase(propertyManager.getProperty("HEADLESS"))) {
-                    chromeOptions.addArguments("--headless");
-                }
-                return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+//            case "REMOTE":
+//                WebDriverManager.chromedriver().setup();
+//                ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addArguments("--no-sandbox");
+//                if ("Y".equalsIgnoreCase(propertyManager.getProperty("HEADLESS"))) {
+//                    chromeOptions.addArguments("--headless");
+//                }
+//                return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
 
             default:
                 ChromeOptions chromeOption = new ChromeOptions();

@@ -1,20 +1,22 @@
 package pages;
 
-import drivers.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import tests.BaseTest;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class QAElementsPageXPath extends Driver {
+public class QADemoElementsPage extends BasePageUtil {
 
-    public QAElementsPageXPath() {
-        super();
+    private WebDriver driver = BaseTest.getDriver();
+    public QADemoElementsPage(WebDriver driver) {
+        super(driver);
     }
-
+    public WebDriver getDriver() {
+        return driver;
+    }
     //MENU BUTTOS
     public static final By BUTTONS_MENU = By.xpath("//*[@id='item-4']//*[text()='Buttons']");
     public static final By WEB_TABLES_MENU = By.xpath("//*[@id='item-3']//*[text()='Web Tables']");
@@ -35,25 +37,26 @@ public class QAElementsPageXPath extends Driver {
     public static final By SALARY_TXT = By.xpath("//input[@id='salary']");
     public static final By DEPARTMENT_TXT = By.xpath("//input[@id='department']");
 
-    public WebDriverWait webDriverWait;
-
-    public QAElementsPageXPath waitForIt(long a) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(a);
-        return this;
-    }
 
 
-    public void clickElement(By by) {
-        driver.findElement(by).click();
-    }
 
-    public void fillTextField(By by, String text) {
-        driver.findElement(by).clear();
-        driver.findElement(by).sendKeys(text);
-    }
+//    public QADemoElementsPage waitForIt(long a) throws InterruptedException {
+//        TimeUnit.SECONDS.sleep(a);
+//        return this;
+//    }
+//
+//
+//    public void clickElement(By by) {
+//        driver.findElement(by).click();
+//    }
+//
+//    public void fillTextField(By by, String text) {
+//        driver.findElement(by).clear();
+//        driver.findElement(by).sendKeys(text);
+//    }
 
 
-    public QAElementsPageXPath openElementsMeuPages(String menuname) {
+    public QADemoElementsPage openElementsMeuPages(String menuname) {
 
         switch (menuname) {
             case "Buttons":
@@ -69,18 +72,18 @@ public class QAElementsPageXPath extends Driver {
     }
 
 
-    public QAElementsPageXPath clickMeButtons() {
+    public QADemoElementsPage clickMeButtons() {
         clickElement(CLICK_ME_BUTTON);
         return this;
     }
 
-    public QAElementsPageXPath verifyClickMeBottonsMesage() {
+    public QADemoElementsPage verifyClickMeBottonsMesage() {
         String message = driver.findElement(CLICK_ME_BUTTON_MSG).getText();
         Assert.assertEquals(message, "You have done a dynamic click");
         return this;
     }
 
-    public QAElementsPageXPath pressWebTablesButtons(String button) {
+    public QADemoElementsPage pressWebTablesButtons(String button) {
         switch (button) {
             case "Add":
                 clickElement(ADD_BUTTON);
@@ -94,34 +97,34 @@ public class QAElementsPageXPath extends Driver {
         return this;
     }
 
-    public QAElementsPageXPath fillFirstName(String name) {
+    public QADemoElementsPage fillFirstName(String name) {
         fillTextField(FIRST_NAME_TXT, name);
         return this;
     }
 
-    public QAElementsPageXPath fillLastName(String lastname) {
+    public QADemoElementsPage fillLastName(String lastname) {
         fillTextField(LAST_NAME_TXT, lastname);
         return this;
     }
 
-    public QAElementsPageXPath fillEmail(String email) {
+    public QADemoElementsPage fillEmail(String email) {
         fillTextField(EMAIL_TXT, email);
 
         return this;
     }
 
-    public QAElementsPageXPath fillAge(String age) {
+    public QADemoElementsPage fillAge(String age) {
         fillTextField(AGE_TXT, age);
         return this;
     }
 
-    public QAElementsPageXPath fillSalary(String salary) {
+    public QADemoElementsPage fillSalary(String salary) {
         fillTextField(SALARY_TXT, salary);
 
         return this;
     }
 
-    public QAElementsPageXPath fillDepartment(String department) {
+    public QADemoElementsPage fillDepartment(String department) {
         fillTextField(DEPARTMENT_TXT, department);
 
         return this;
@@ -142,7 +145,7 @@ public class QAElementsPageXPath extends Driver {
         return index;
     }
 
-    public QAElementsPageXPath pressEntryEdit(String search) {
+    public QADemoElementsPage pressEntryEdit(String search) {
         clickElement(By.xpath("//span[@id='edit-record-" + findEntry(search) + "']"));
         return this;
     }
