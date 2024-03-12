@@ -9,9 +9,6 @@ public class QADemoHomePage extends BasePageUtil {
         super(driver);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 
 
     public QADemoHomePage openQADemoPages(String name){

@@ -7,7 +7,7 @@ import java.time.Duration;
 public class Driver {
     public static WebDriver driver;
 
-    public static WebDriver initializeDriver(WebDriver driver) {
+    public static WebDriver initializeDriver() {
         driver = DriverFactory.getDriver();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));

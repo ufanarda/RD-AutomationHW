@@ -1,13 +1,11 @@
-package tests;
+package steps;
 
 import driver.Driver;
-
-
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import utils.PropertyManager;
+
 
 public class BaseTest {
 
@@ -20,16 +18,16 @@ public class BaseTest {
 
 
 
-    @BeforeMethod()
+    @Before
     public void before() {
-        driver = webDriver.initializeDriver(driver);
+        driver = webDriver.initializeDriver();
         driver.get(url);
         setDriver(driver);
     }
 
 
 
-    @AfterMethod()
+    @After
     public void after() {
         webDriver.quitDriver();
     }

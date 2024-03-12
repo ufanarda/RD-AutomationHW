@@ -3,7 +3,6 @@ package steps;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import pages.QADemoHomePage;
-import tests.BaseTest;
 
 public class QAHomePageSteps {
 

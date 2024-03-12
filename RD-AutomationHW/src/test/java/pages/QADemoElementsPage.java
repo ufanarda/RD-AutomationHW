@@ -4,56 +4,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import tests.BaseTest;
 
 import java.util.List;
 
+import static Constants.ElementsPageConstants.*;
+
 public class QADemoElementsPage extends BasePageUtil {
 
-    private WebDriver driver = BaseTest.getDriver();
     public QADemoElementsPage(WebDriver driver) {
         super(driver);
     }
-    public WebDriver getDriver() {
-        return driver;
-    }
-    //MENU BUTTOS
-    public static final By BUTTONS_MENU = By.xpath("//*[@id='item-4']//*[text()='Buttons']");
-    public static final By WEB_TABLES_MENU = By.xpath("//*[@id='item-3']//*[text()='Web Tables']");
-
-    //BUTTONS PAGE
-    public static final By CLICK_ME_BUTTON = By.xpath("//button[text()='Click Me']");
-    public static final By CLICK_ME_BUTTON_MSG = By.xpath("//*[@id='dynamicClickMessage']");
 
 
-    //WEB TABLES PAGE
-    public static final By ADD_BUTTON = By.xpath("//button[@id='addNewRecordButton']");
-    public static final By SUBMIT_BUTTON = By.xpath("//button[@id='submit']");
+    private static String yeniKayit;
 
-    public static final By FIRST_NAME_TXT = By.xpath("//input[@id='firstName']");
-    public static final By LAST_NAME_TXT = By.xpath("//input[@id='lastName']");
-    public static final By EMAIL_TXT = By.xpath("//input[@id='userEmail']");
-    public static final By AGE_TXT = By.xpath("//input[@id='age']");
-    public static final By SALARY_TXT = By.xpath("//input[@id='salary']");
-    public static final By DEPARTMENT_TXT = By.xpath("//input[@id='department']");
-
-
-
-
-//    public QADemoElementsPage waitForIt(long a) throws InterruptedException {
-//        TimeUnit.SECONDS.sleep(a);
-//        return this;
-//    }
-//
-//
-//    public void clickElement(By by) {
-//        driver.findElement(by).click();
-//    }
-//
-//    public void fillTextField(By by, String text) {
-//        driver.findElement(by).clear();
-//        driver.findElement(by).sendKeys(text);
-//    }
+    private static List<WebElement> employee_elements;
 
 
     public QADemoElementsPage openElementsMeuPages(String menuname) {
@@ -99,55 +64,87 @@ public class QADemoElementsPage extends BasePageUtil {
 
     public QADemoElementsPage fillFirstName(String name) {
         fillTextField(FIRST_NAME_TXT, name);
+        setYeniKayit(name);
         return this;
     }
 
     public QADemoElementsPage fillLastName(String lastname) {
         fillTextField(LAST_NAME_TXT, lastname);
+        setYeniKayit(lastname);
         return this;
     }
 
     public QADemoElementsPage fillEmail(String email) {
         fillTextField(EMAIL_TXT, email);
-
+        setYeniKayit(email);
         return this;
     }
 
     public QADemoElementsPage fillAge(String age) {
         fillTextField(AGE_TXT, age);
+        setYeniKayit(age);
         return this;
     }
 
     public QADemoElementsPage fillSalary(String salary) {
         fillTextField(SALARY_TXT, salary);
-
+        setYeniKayit(salary);
         return this;
     }
 
     public QADemoElementsPage fillDepartment(String department) {
         fillTextField(DEPARTMENT_TXT, department);
-
+        setYeniKayit(department);
         return this;
     }
 
 
     public int findEntry(String text) {
-        List<WebElement> employee_elements = driver.findElements(By.xpath("//div[@role='rowgroup']"));
-
         int index = 0;
-        for (int i = 0; i < employee_elements.size(); i++) {
-            if (employee_elements.get(i).getText().contains(text)) {
-                index = i + 1;
-                System.out.println(employee_elements.get(i).getText());
+        for (int i = 0; i < getEmployeeList().size(); i++) {
+            if (getEmployeeList().get(i).getText().contains(text)) {
+                index = i;
                 break;
             }
         }
         return index;
     }
 
-    public QADemoElementsPage pressEntryEdit(String search) {
-        clickElement(By.xpath("//span[@id='edit-record-" + findEntry(search) + "']"));
+    public QADemoElementsPage verifyNewEntry(){
+        setEmployeeList(driver.findElements(By.xpath("//div[@role='rowgroup']")));
+        int index = findEntry(getYeniKayit());
+        assertEquals(getEmployeeList().get(index).getText(),getYeniKayit());
         return this;
+    }
+
+
+    public QADemoElementsPage pressLastEntryEdit() {
+        int index = findEntry(getYeniKayit())+1;
+        clickElement(By.xpath("//span[@id='edit-record-" + index + "']"));
+        deleteYeniKayit();
+        return this;
+    }
+
+
+    public static void setEmployeeList(List<WebElement> elist) {
+        QADemoElementsPage.employee_elements = elist;
+    }
+
+    public static List<WebElement> getEmployeeList() {
+        return employee_elements;
+    }
+
+
+    public static void setYeniKayit(String kayit) {
+        yeniKayit = yeniKayit + "\n" + kayit;
+    }
+
+    public static void deleteYeniKayit() {
+        yeniKayit = null;
+    }
+
+    public static String getYeniKayit() {
+        return yeniKayit.replaceAll("null\n", "");
     }
 
 }
