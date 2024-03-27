@@ -1,10 +1,12 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static Constants.ElementsPageConstants.*;
@@ -16,9 +18,9 @@ public class QADemoElementsPage extends BasePageUtil {
     }
 
 
-    private static String yeniKayit;
+    private String yeniKayit;
 
-    private static List<WebElement> employee_elements;
+    private List<WebElement> employee_elements = new ArrayList<>();
 
 
     public QADemoElementsPage openElementsMeuPages(String menuname) {
@@ -110,6 +112,7 @@ public class QADemoElementsPage extends BasePageUtil {
         return index;
     }
 
+    @Step("Yeni girilen veya degistirilen bilgiler kontrol edilir")
     public QADemoElementsPage verifyNewEntry(){
         setEmployeeList(driver.findElements(By.xpath("//div[@role='rowgroup']")));
         int index = findEntry(getYeniKayit());
@@ -126,24 +129,24 @@ public class QADemoElementsPage extends BasePageUtil {
     }
 
 
-    public static void setEmployeeList(List<WebElement> elist) {
-        QADemoElementsPage.employee_elements = elist;
+    public void setEmployeeList(List<WebElement> elist) {
+        employee_elements = elist;
     }
 
-    public static List<WebElement> getEmployeeList() {
+    public List<WebElement> getEmployeeList() {
         return employee_elements;
     }
 
 
-    public static void setYeniKayit(String kayit) {
+    public void setYeniKayit(String kayit) {
         yeniKayit = yeniKayit + "\n" + kayit;
     }
 
-    public static void deleteYeniKayit() {
+    public void deleteYeniKayit() {
         yeniKayit = null;
     }
 
-    public static String getYeniKayit() {
+    public String getYeniKayit() {
         return yeniKayit.replaceAll("null\n", "");
     }
 

@@ -14,6 +14,7 @@
         <java.version>21</java.version>
         <cucumber-version>7.14.0</cucumber-version>
         <selenium-version>4.18.1</selenium-version>
+        <allure-version>2.26.0</allure-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -106,6 +107,19 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>${allure-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-version}</version>
+        </dependency>
+
+
 
     </dependencies>
 
